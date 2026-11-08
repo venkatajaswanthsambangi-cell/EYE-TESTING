@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TEST YOUR EYES - Voice-Based Multilingual Digital Eyesight Screening System. Preliminary vision tests including Tumbling E, Alphabet Acuity, Colour Vision, and Amsler Grid.">
+  <title>TEST YOUR EYES | Digital Eyesight Screening System</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Atmospheric Liquid Glass Background Lights -->
+  <div class="glass-ambient-container" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+    <div class="ambient-orb orb-4"></div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" id="navLogo" aria-label="Test Your Eyes Home">
+        <div class="logo-icon-wrapper">
+          <svg class="eye-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 5V3M12 21v-2M5 12H3m18 0h-2"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">TEST YOUR EYES</span>
+          <span class="brand-tagline" data-i18n="nav_tagline">Digital Vision Screening</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+        <a href="#home" class="nav-link active" data-target="home">Home</a>
+        <a href="#language" class="nav-link" data-target="language">Screening</a>
+        <a href="#instructions" class="nav-link" data-target="instructions">How It Works</a>
+        <a href="#results" class="nav-link" data-target="results">Results</a>
+        <a href="#learn" class="nav-link" data-target="learn">Eye Care</a>
+      </nav>
+
+      <!-- Progress Track in Header (visible during screening) -->
+      <div class="nav-progress-indicator" id="navProgressContainer" style="display: none;">
+        <span class="nav-step-label" id="navStepLabel">Step 1 of 6</span>
+        <div class="nav-progress-bar">
+          <div class="nav-progress-fill" id="navProgressFill" style="width: 15%;"></div>
+        </div>
+      </div>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <!-- Voice Assistant Status Pill / Modal Trigger -->
+        <button class="voice-assistant-btn" id="voiceAssistantBtn" title="Voice Guidance & Commands" aria-label="Voice Guidance Information">
+          <span class="voice-icon-pulse">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" x2="12" y1="19" y2="22"/>
+            </svg>
+          </span>
+          <span class="voice-btn-label" data-i18n="voice_label">Voice Ready</span>
+        </button>
+
+        <!-- Current Language Quick Dropdown / Button -->
+        <button class="lang-nav-btn" id="langNavBtn" title="Switch Language" aria-label="Change Language">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" x2="22" y1="12" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span id="currentLangTag">English</span>
+        </button>
+
+        <!-- Screen DPI Calibration Quick Tool Trigger -->
+        <button class="btn-icon" id="btnNavCalibration" title="Screen DPI Calibration (Optional)" aria-label="Calibrate Screen Size">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="5" width="20" height="14" rx="2"/>
+            <line x1="2" y1="10" x2="22" y2="10"/>
+            <line x1="7" y1="15" x2="7.01" y2="15"/>
+            <line x1="11" y1="15" x2="13" y2="15"/>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <span class="sun-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </span>
+          <span class="moon-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+        </button>
+
+        <!-- Quick Reset / Home Button -->
+        <button class="btn-icon" id="quickHomeBtn" title="Back to Home" aria-label="Return to Home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </button>
+
+        <!-- Mobile Navigation Menu Toggle -->
+        <button class="btn-icon mobile-menu-toggle" id="btnMobileNavToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+          <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Glass Dropdown Menu -->
+      <div class="mobile-nav-menu" id="mobileNavMenu">
+        <a href="#home" class="mobile-nav-link active" data-target="home">Home</a>
+        <a href="#language" class="mobile-nav-link" data-target="language">Screening</a>
+        <a href="#instructions" class="mobile-nav-link" data-target="instructions">How It Works</a>
+        <a href="#results" class="mobile-nav-link" data-target="results">Results</a>
+        <a href="#learn" class="mobile-nav-link" data-target="learn">Eye Care</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Medical Disclaimer Banner -->
+  <aside class="global-disclaimer-banner" role="alert">
+    <div class="disclaimer-content">
+      <svg class="disclaimer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <p>
+        <strong data-i18n="disclaimer_title">Medical Disclaimer:</strong>
+        <span data-i18n="disclaimer_text">TEST YOUR EYES is an educational preliminary eyesight screening tool. It is not a substitute for a professional eye examination and cannot diagnose eye diseases.</span>
+      </p>
+    </div>
+  </aside>
+
+  <!-- Interactive Breadcrumb Stepper (Shown when in screening workflow) -->
+  <nav class="screening-stepper" id="screeningStepper" style="display: none;" aria-label="Screening steps">
+    <div class="stepper-inner">
+      <div class="step-node active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-text" data-i18n="step_language">Language</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-node" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-text" data-i18n="step_instructions">Instructions</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-node" data-step="3">
+        <span class="step-num">3</span>
+        <span class="step-text" data-i18n="step_tumbling">Tumbling E</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-node" data-step="4">
+        <span class="step-num">4</span>
+        <span class="step-text" data-i18n="step_alphabet">Alphabet</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-node" data-step="5">
+        <span class="step-num">5</span>
+        <span class="step-text" data-i18n="step_colour">Colour Vision</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-node" data-step="6">
+        <span class="step-num">6</span>
+        <span class="step-text" data-i18n="step_results">Results</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ========================================================
+         SECTION 1: HOME / LANDING PAGE
+         ======================================================== -->
+    <section class="page-section active" id="sectionHome" data-section="home">
+      <div class="hero-container">
+        <!-- Ambient Hero Glow Backgrounds -->
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span data-i18n="hero_badge">Clinical Screening Technology &bull; Voice-Assisted</span>
+          </div>
+          
+          <h1 class="hero-title">
+            <span class="hero-title-main" data-i18n="hero_title_main">TEST YOUR EYES</span>
+            <span class="hero-title-sub gradient-text" data-i18n="hero_title_sub">SAVE YOUR EYES</span>
+            <span class="hero-title-tagline" data-i18n="hero_title_tagline">Save Your Eyes, Check Your Vision</span>
+          </h1>
+
+          <p class="hero-description" data-i18n="hero_desc">
+            An accessible, multilingual digital vision screening platform. Screen your visual acuity with calibrated Tumbling E and Snellen tests, assess colour perception, and receive immediate preliminary eye wellness reports with voice-guided support.
+          </p>
+
+          <div class="hero-cta-group">
+            <button class="btn btn-primary btn-lg pulse-glow" id="btnStartScreening">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="10 8 16 12 10 16 10 8"/>
+              </svg>
+              <span data-i18n="btn_start_screening">Start Eye Screening</span>
+            </button>
+            <button class="btn btn-secondary btn-lg" id="btnExploreLearn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+              <span data-i18n="btn_learn_more">Learn Eye Care</span>
+            </button>
+          </div>
+
+          <!-- Feature Highlights Bar -->
+          <div class="hero-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m5 8 6 6"/>
+                  <path d="m4 14 6-6 2-3"/>
+                  <path d="M2 5h12"/>
+                  <path d="M7 2h1"/>
+                  <path d="m22 22-5-10-5 10"/>
+                  <path d="M14 18h6"/>
+                </svg>
+              </div>
+              <div class="highlight-meta">
+                <strong data-i18n="feat_multilingual_title">4 Regional Languages</strong>
+                <span data-i18n="feat_multilingual_desc">English, Telugu, Hindi, Tamil</span>
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="22"/>
+                </svg>
+              </div>
+              <div class="highlight-meta">
+                <strong data-i18n="feat_voice_title">Voice-Assisted Prep</strong>
+                <span data-i18n="feat_voice_desc">Audio Prompts & Voice Cheatsheet</span>
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+              </div>
+              <div class="highlight-meta">
+                <strong data-i18n="feat_report_title">Instant Summary</strong>
+                <span data-i18n="feat_report_desc">Monocular Analysis & Print Report</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Eye-Themed Interactive Hero Illustration -->
+        <div class="hero-visual">
+          <div class="interactive-eye-card">
+            <div class="eye-illustration-container">
+              <svg class="hero-eye-graphic" viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="irisGradient" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#38bdf8"/>
+                    <stop offset="65%" stop-color="#3b82f6"/>
+                    <stop offset="100%" stop-color="#1e1b4b"/>
+                  </radialGradient>
+                  <linearGradient id="scleraGlow" x1="0" y1="0" x2="320" y2="220" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="rgba(99, 102, 241, 0.2)"/>
+                    <stop offset="100%" stop-color="rgba(168, 85, 247, 0.05)"/>
+                  </linearGradient>
+                </defs>
+                <!-- Outer Eye Contour -->
+                <path d="M20 110C60 40 260 40 300 110C260 180 60 180 20 110Z" fill="url(#scleraGlow)" stroke="currentColor" stroke-width="3" class="eye-outline"/>
+                <!-- Eye Lashes / Decorative Nodes -->
+                <circle cx="160" cy="110" r="62" stroke="#6366f1" stroke-width="2" stroke-dasharray="4 4" class="reticle-ring"/>
+                <!-- Iris -->
+                <circle cx="160" cy="110" r="48" fill="url(#irisGradient)" class="iris-circle"/>
+                <!-- Pupil -->
+                <circle cx="160" cy="110" r="22" fill="#0f172a" class="pupil-circle"/>
+                <!-- Light Glint Reflection -->
+                <circle cx="152" cy="100" r="7" fill="#ffffff" opacity="0.9"/>
+                <circle cx="170" cy="118" r="3.5" fill="#ffffff" opacity="0.6"/>
+                <!-- Crosshair target marks -->
+                <line x1="160" y1="40" x2="160" y2="52" stroke="#38bdf8" stroke-width="2"/>
+                <line x1="160" y1="168" x2="160" y2="180" stroke="#38bdf8" stroke-width="2"/>
+                <line x1="90" y1="110" x2="102" y2="110" stroke="#38bdf8" stroke-width="2"/>
+                <line x1="218" y1="110" x2="230" y2="110" stroke="#38bdf8" stroke-width="2"/>
+              </svg>
+              <div class="scan-line"></div>
+            </div>
+
+            <!-- Floating Mini Status Badges -->
+            <div class="floating-badge badge-top-right">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>OD &bull; Right Eye Ready</span>
+            </div>
+            <div class="floating-badge badge-bottom-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span>LogMAR / Snellen Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features Cards Grid -->
+      <div class="home-features-section">
+        <div class="section-header text-center">
+          <span class="sub-badge" data-i18n="feat_header_sub">Comprehensive Battery</span>
+          <h2 class="section-title" data-i18n="feat_header_title">Screening Capabilities</h2>
+          <p class="section-subtitle" data-i18n="feat_header_desc">Scientifically structured preliminary optical tests designed for self-assessment.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon icon-blue">
+              <span class="optotype-demo">E</span>
+            </div>
+            <h3 data-i18n="card_tumbling_title">Tumbling E Acuity</h3>
+            <p data-i18n="card_tumbling_desc">Designed for all literacy levels. Detect the orientation of the letter E facing Up, Down, Left, or Right as font sizes progressively decrease.</p>
+            <span class="card-indicator" data-i18n="card_tumbling_meta">Monocular (Right & Left)</span>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-purple">
+              <span class="optotype-demo">S N</span>
+            </div>
+            <h3 data-i18n="card_alphabet_title">Alphabet Snellen Acuity</h3>
+            <p data-i18n="card_alphabet_desc">Standard Sloan and Snellen letter chart simulation. Recognise randomized standard optical optotypes across multiple visual acuity tiers.</p>
+            <span class="card-indicator" data-i18n="card_alphabet_meta">Voice & Tap Enabled</span>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="4"/>
+                <line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/>
+                <line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/>
+                <line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/>
+                <line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/>
+              </svg>
+            </div>
+            <h3 data-i18n="card_colour_title">Colour Vision Plates</h3>
+            <p data-i18n="card_colour_desc">High-fidelity digital pseudoisochromatic plate simulations. Screen for red-green and blue-yellow colour perception variations.</p>
+            <span class="card-indicator" data-i18n="card_colour_meta">Pseudoisochromatic</span>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-teal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+            </div>
+            <h3 data-i18n="card_voice_title">Voice-Guided Screening</h3>
+            <p data-i18n="card_voice_desc">Complete speech-assisted guidance in Telugu, Hindi, Tamil, and English. Speak your answers or tap on-screen controls.</p>
+            <span class="card-indicator" data-i18n="card_voice_meta">Multilingual Voice AI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 2: LANGUAGE SELECTION
+         ======================================================== -->
+    <section class="page-section" id="sectionLanguage" data-section="language">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="sub-badge" data-i18n="lang_badge">Step 1 of Screening</span>
+          <h2 class="section-title" data-i18n="lang_title">Choose Your Preferred Language</h2>
+          <p class="section-subtitle" data-i18n="lang_subtitle">
+            All visual instructions, prompts, and future audio synthesis will adapt to your selected language.
+          </p>
+        </div>
+
+        <div class="languages-grid" id="languagesGrid">
+          <!-- English -->
+          <div class="language-card active-lang" data-lang="en" role="button" tabindex="0" aria-label="Select English Language">
+            <div class="lang-card-header">
+              <span class="lang-badge-pill">en-US</span>
+              <div class="lang-check-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+            </div>
+            <div class="lang-native-name">English</div>
+            <div class="lang-english-name">Standard English</div>
+            <p class="lang-desc">Complete interface, spoken voice prompts, and detailed diagnostic summary in English.</p>
+            <div class="lang-sample-quote">"Cover your left eye and look at the screen."</div>
+          </div>
+
+          <!-- Telugu -->
+          <div class="language-card" data-lang="te" role="button" tabindex="0" aria-label="తెలుగు భాషను ఎంచుకోండి (Select Telugu)">
+            <div class="lang-card-header">
+              <span class="lang-badge-pill">te-IN</span>
+              <div class="lang-check-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+            </div>
+            <div class="lang-native-name">తెలుగు</div>
+            <div class="lang-english-name">Telugu</div>
+            <p class="lang-desc">సమగ్ర సూచనలు, పరీక్షల ప్రశ్నలు మరియు ఫలితాల విశ్లేషణ తెలుగులో లభిస్తాయి.</p>
+            <div class="lang-sample-quote">"మీ ఎడమ కన్నును మూసి స్క్రీన్ వైపు చూడండి."</div>
+          </div>
+
+          <!-- Hindi -->
+          <div class="language-card" data-lang="hi" role="button" tabindex="0" aria-label="हिंदी भाषा चुनें (Select Hindi)">
+            <div class="lang-card-header">
+              <span class="lang-badge-pill">hi-IN</span>
+              <div class="lang-check-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+            </div>
+            <div class="lang-native-name">हिन्दी</div>
+            <div class="lang-english-name">Hindi</div>
+            <p class="lang-desc">नेत्र परीक्षण के सभी निर्देश, ऑडियो संकेत और परिणाम रिपोर्ट हिंदी में उपलब्ध हैं।</p>
+            <div class="lang-sample-quote">"अपनी बाईं आंख को ढकें और स्क्रीन पर देखें।"</div>
+          </div>
+
+          <!-- Tamil -->
+          <div class="language-card" data-lang="ta" role="button" tabindex="0" aria-label="தமிழ் மொழியைத் தேர்ந்தெடுக்கவும் (Select Tamil)">
+            <div class="lang-card-header">
+              <span class="lang-badge-pill">ta-IN</span>
+              <div class="lang-check-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+            </div>
+            <div class="lang-native-name">தமிழ்</div>
+            <div class="lang-english-name">Tamil</div>
+            <p class="lang-desc">முழுமையான பார்வை பரிசோதனை வழிமுறைகள் மற்றும் முடிவுகள் தமிழில் வழங்கப்படும்.</p>
+            <div class="lang-sample-quote">"உங்கள் இடது கண்ணை மூடி திரையைப் பாருங்கள்."</div>
+          </div>
+        </div>
+
+        <!-- Section Navigation Footer -->
+        <div class="section-footer-nav">
+          <button class="btn btn-secondary" id="btnLangBack">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            <span data-i18n="btn_back">Back</span>
+          </button>
+          <button class="btn btn-primary btn-lg" id="btnLangConfirm">
+            <span data-i18n="btn_confirm_lang">Confirm &amp; Proceed to Instructions</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 3: SCREENING INSTRUCTIONS
+         ======================================================== -->
+    <section class="page-section" id="sectionInstructions" data-section="instructions">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="sub-badge" data-i18n="inst_badge">Essential Setup</span>
+          <h2 class="section-title" data-i18n="inst_title">How to Prepare for Accurate Screening</h2>
+          <p class="section-subtitle" data-i18n="inst_subtitle">
+            Follow these clinical standard ergonomics for the most dependable preliminary screening results.
+          </p>
+        </div>
+
+        <div class="instructions-cards-grid">
+          <!-- Card 1: Viewing Distance -->
+          <div class="instruction-card">
+            <div class="instruction-icon-bubble">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <div class="instruction-body">
+              <div class="instruction-step-tag" data-i18n="inst_step1_tag">Step 1: Distance</div>
+              <h3 data-i18n="inst_step1_title">Arm's Length Distance</h3>
+              <p data-i18n="inst_step1_desc">Position yourself approximately <strong>40 – 50 cm</strong> (about an arm's length) away from your laptop or monitor. For mobile devices, hold at <strong>35 – 40 cm</strong>.</p>
+              <div class="instruction-tip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                <span data-i18n="inst_step1_tip">Do not lean forward during the test.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Room Lighting -->
+          <div class="instruction-card">
+            <div class="instruction-icon-bubble">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+              </svg>
+            </div>
+            <div class="instruction-body">
+              <div class="instruction-step-tag" data-i18n="inst_step2_tag">Step 2: Lighting</div>
+              <h3 data-i18n="inst_step2_title">Optimal Balanced Light</h3>
+              <p data-i18n="inst_step2_desc">Ensure your room is evenly illuminated with no direct glare, reflections, or harsh sunlight falling onto your screen. Set screen brightness to 70-80%.</p>
+              <div class="instruction-tip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                <span data-i18n="inst_step2_tip">Turn off blue light filters/night mode for color accuracy.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Monocular Covering Technique -->
+          <div class="instruction-card">
+            <div class="instruction-icon-bubble">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
+                <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
+                <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
+                <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+              </svg>
+            </div>
+            <div class="instruction-body">
+              <div class="instruction-step-tag" data-i18n="inst_step3_tag">Step 3: Covering Eye</div>
+              <h3 data-i18n="inst_step3_title">Cover Without Pressing</h3>
+              <p data-i18n="inst_step3_desc">Cup the palm of your hand or an opaque card gently over one eye. <strong>Never press against the eyeball</strong> or eyelids, as pressure temporarily blurs vision.</p>
+              <div class="instruction-tip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                <span data-i18n="inst_step3_tip">Keep both eyes open behind your palm to prevent squinting.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Why Monocular Testing -->
+          <div class="instruction-card">
+            <div class="instruction-icon-bubble">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </div>
+            <div class="instruction-body">
+              <div class="instruction-step-tag" data-i18n="inst_step4_tag">Step 4: Monocular Test</div>
+              <h3 data-i18n="inst_step4_title">Why Test Each Eye Separately?</h3>
+              <p data-i18n="inst_step4_desc">The brain naturally compensates using the stronger eye. Testing each eye monocularly uncovers unilateral refractive errors, astigmatism, or amblyopia.</p>
+              <div class="instruction-tip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                <span data-i18n="inst_step4_tip">We test the Right Eye (OD) first, then Left Eye (OS).</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audio Voice Guidance Control Strip -->
+        <div class="voice-instruction-bar">
+          <div class="voice-bar-left">
+            <button class="btn btn-audio-play" id="btnSpeakInstructions">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              </svg>
+              <span id="btnSpeakText" data-i18n="btn_read_instructions">Listen to Instructions (Audio)</span>
+            </button>
+            <button class="btn btn-outline btn-sm" id="btnLaunchCalibrationFromInst" title="Calibrate physical millimeter sizing for accurate visual angle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+              </svg>
+              <span>Screen DPI Calibration (Optional)</span>
+            </button>
+            <span class="audio-feedback-status" id="audioFeedbackStatus">Speech voice ready</span>
+          </div>
+          <div class="voice-bar-right">
+            <span class="voice-hint-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+              <span data-i18n="voice_input_ready_chip">Voice commands ready</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Section Navigation Footer -->
+        <div class="section-footer-nav">
+          <button class="btn btn-secondary" id="btnInstBack">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            <span data-i18n="btn_back">Back</span>
+          </button>
+          <button class="btn btn-primary btn-lg" id="btnStartTumblingTest">
+            <span data-i18n="btn_start_tumbling">Start Tumbling E Test</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 4: TUMBLING E-DIRECTION TEST
+         ======================================================== -->
+    <section class="page-section" id="sectionTumbling" data-section="tumbling">
+      <div class="test-container">
+        <!-- Test Header & Status -->
+        <div class="test-header">
+          <div class="eye-testing-badge" id="tumblingEyeBadge">
+            <span class="eye-badge-dot"></span>
+            <span class="eye-badge-text" id="tumblingEyeLabel">TESTING RIGHT EYE (OD)</span>
+          </div>
+
+          <div class="test-progress-wrapper">
+            <div class="test-progress-text">
+              <span data-i18n="acuity_level_label">Acuity Level:</span>
+              <strong id="tumblingLevelDisplay">20/200</strong>
+              <span class="test-count" id="tumblingStepCounter">(Question 1 of 6)</span>
+            </div>
+            <div class="test-progress-track">
+              <div class="test-progress-fill" id="tumblingProgressFill" style="width: 16%;"></div>
+            </div>
+          </div>
+
+          <!-- Current Eye Instruction Alert -->
+          <div class="eye-prompt-alert" id="tumblingPromptAlert" aria-live="polite">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span id="tumblingInstructionText">Cover your LEFT eye with your palm. Look at the letter E and select the direction the open legs are pointing.</span>
+          </div>
+
+          <!-- Missing Voice Warning Banner (Visible only when chosen language lacks OS voice synthesis) -->
+          <div class="missing-voice-alert" id="missingVoiceNoticeTumbling" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span id="missingVoiceNoticeTumblingText">Native voice synthesis is unavailable for this language on this browser/OS. Complete text prompts and answer buttons remain fully active.</span>
+          </div>
+        </div>
+
+        <!-- Tumbling E Optotype Stage (Clinical Matte High-Contrast Arena) -->
+        <div class="optotype-stage" id="tumblingStage" aria-label="Tumbling E Optotype">
+          <div class="optotype-calibration-box">
+            <div class="tumbling-e-symbol" id="tumblingSymbol" style="transform: rotate(0deg);" aria-hidden="true">
+              E
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Speech Recognition HUD & Transcript Feedback -->
+        <div class="live-speech-hud" id="tumblingSpeechHUD">
+          <div class="hud-left">
+            <span class="hud-mic-dot" id="tumblingMicPulseDot"></span>
+            <span class="hud-status-text" id="tumblingHUDStatus">Microphone standby &bull; Speak or tap direction below</span>
+          </div>
+          <div class="hud-transcript-bubble" id="tumblingTranscriptBubble" style="display: none;">
+            <span class="bubble-tag">Heard:</span>
+            <strong id="tumblingTranscriptText">"..."</strong>
+          </div>
+        </div>
+
+        <!-- Answer Direction Controls -->
+        <div class="answer-controls-wrapper">
+          <div class="directional-pad" role="group" aria-label="Tumbling E Direction Controls">
+            <!-- Up -->
+            <button class="dir-btn dir-btn-up" data-dir="up" id="btnDirUp" aria-label="Pointing Up (Arrow Up)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
+              <span data-i18n="dir_up">UP</span>
+              <span class="kbd-hint">&uarr;</span>
+            </button>
+
+            <!-- Mid Row: Left, Center Info, Right -->
+            <div class="dir-btn-mid-row">
+              <button class="dir-btn dir-btn-left" data-dir="left" id="btnDirLeft" aria-label="Pointing Left (Arrow Left)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"/></svg>
+                <span data-i18n="dir_left">LEFT</span>
+                <span class="kbd-hint">&larr;</span>
+              </button>
+
+              <div class="dir-center-compass" title="Select direction or use keyboard arrows">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polygon points="12 2 15 9 12 7 9 9 12 2" fill="currentColor"/>
+                </svg>
+              </div>
+
+              <button class="dir-btn dir-btn-right" data-dir="right" id="btnDirRight" aria-label="Pointing Right (Arrow Right)">
+                <span data-i18n="dir_right">RIGHT</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"/></svg>
+                <span class="kbd-hint">&rarr;</span>
+              </button>
+            </div>
+
+            <!-- Down -->
+            <button class="dir-btn dir-btn-down" data-dir="down" id="btnDirDown" aria-label="Pointing Down (Arrow Down)">
+              <span data-i18n="dir_down">DOWN</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>
+              <span class="kbd-hint">&darr;</span>
+            </button>
+          </div>
+
+          <!-- Unclear / Can't see button -->
+          <div class="cant-see-container">
+            <button class="btn btn-secondary btn-cant-see" id="btnTumblingCantSee">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+              <span data-i18n="btn_cant_see">I Cannot See Clearly / Too Small</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Test Navigation Actions -->
+        <div class="test-action-bar">
+          <button class="btn btn-sm btn-outline" id="btnTumblingRepeatAudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+            <span data-i18n="btn_repeat_instruction">Repeat Audio Prompt</span>
+          </button>
+          <button class="btn btn-sm btn-outline text-danger" id="btnTumblingAbort">
+            <span data-i18n="btn_restart_test">Restart Test</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 5: ALPHABET VISUAL ACUITY TEST
+         ======================================================== -->
+    <section class="page-section" id="sectionAlphabet" data-section="alphabet">
+      <div class="test-container">
+        <!-- Test Header & Status -->
+        <div class="test-header">
+          <div class="eye-testing-badge" id="alphabetEyeBadge">
+            <span class="eye-badge-dot"></span>
+            <span class="eye-badge-text" id="alphabetEyeLabel">TESTING RIGHT EYE (OD)</span>
+          </div>
+
+          <div class="test-progress-wrapper">
+            <div class="test-progress-text">
+              <span data-i18n="acuity_level_label">Acuity Level:</span>
+              <strong id="alphabetLevelDisplay">20/100</strong>
+              <span class="test-count" id="alphabetStepCounter">(Letter 1 of 6)</span>
+            </div>
+            <div class="test-progress-track">
+              <div class="test-progress-fill" id="alphabetProgressFill" style="width: 16%;"></div>
+            </div>
+          </div>
+
+          <!-- Eye Prompt Alert -->
+          <div class="eye-prompt-alert" id="alphabetPromptAlert" aria-live="polite">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span id="alphabetInstructionText">Cover your LEFT eye. Identify the letter shown on screen using the buttons below or by speaking.</span>
+          </div>
+
+          <!-- Missing Voice Notice -->
+          <div class="missing-voice-alert" id="missingVoiceNoticeAlphabet" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span id="missingVoiceNoticeAlphabetText">Native voice synthesis is unavailable for this language on this browser/OS. Visual prompts and answer tiles are fully active.</span>
+          </div>
+        </div>
+
+        <!-- Alphabet Optotype Stage -->
+        <div class="optotype-stage" id="alphabetStage" aria-label="Snellen Alphabet Optotype">
+          <div class="optotype-calibration-box">
+            <div class="snellen-letter-display" id="snellenLetterDisplay">
+              D
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Speech Recognition HUD & Transcript Feedback -->
+        <div class="live-speech-hud" id="alphabetSpeechHUD">
+          <div class="hud-left">
+            <span class="hud-mic-dot" id="alphabetMicPulseDot"></span>
+            <span class="hud-status-text" id="alphabetHUDStatus">Microphone standby &bull; Say the letter or select a tile below</span>
+          </div>
+          <div class="hud-transcript-bubble" id="alphabetTranscriptBubble" style="display: none;">
+            <span class="bubble-tag">Heard:</span>
+            <strong id="alphabetTranscriptText">"..."</strong>
+          </div>
+        </div>
+
+        <!-- Multiple Choice Alphabet Answer Grid (No typing required) -->
+        <div class="alphabet-choices-container">
+          <div class="choices-label" data-i18n="choose_letter_label">Select the matching letter:</div>
+          <div class="letter-choices-grid" id="letterChoicesGrid">
+            <!-- Buttons injected dynamically by JS -->
+          </div>
+
+          <div class="cant-see-container">
+            <button class="btn btn-secondary btn-cant-see" id="btnAlphabetCantSee">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+              <span data-i18n="btn_cant_see">I Cannot Read This Letter</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Test Navigation Actions -->
+        <div class="test-action-bar">
+          <button class="btn btn-sm btn-outline" id="btnAlphabetRepeatAudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+            <span data-i18n="btn_repeat_instruction">Repeat Audio Prompt</span>
+          </button>
+          <button class="btn btn-sm btn-outline text-danger" id="btnAlphabetAbort">
+            <span data-i18n="btn_restart_test">Restart Test</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 6: COLOUR VISION SCREENING
+         ======================================================== -->
+    <section class="page-section" id="sectionColour" data-section="colour">
+      <div class="section-container">
+        <!-- COLOUR VISION SCREENING PANEL -->
+        <div class="sub-tab-panel active" id="panelColourVision">
+          <div class="test-header">
+            <div class="plate-meta-badge">
+              <span data-i18n="plate_label">Plate</span> <strong id="colourPlateIndex">1</strong> / 5
+            </div>
+            <div class="test-progress-wrapper">
+              <div class="test-progress-track">
+                <div class="test-progress-fill" id="colourProgressFill" style="width: 20%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="colour-test-layout">
+            <!-- Plate Graphic Display (High-Fidelity Calibrated SVG Pseudoisochromatic Plate) -->
+            <div class="colour-plate-card">
+              <div class="ishihara-plate-viewport" id="plateContainer" aria-label="Colour Vision Plate Simulation">
+                <!-- SVG dynamically injected by script.js -->
+              </div>
+              <div class="plate-attribution-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span data-i18n="plate_accuracy_note">Calibrated pseudoisochromatic plate simulation for red-green and blue-yellow perception.</span>
+              </div>
+            </div>
+
+            <!-- Answer Options -->
+            <div class="colour-answer-panel">
+              <h3 class="colour-panel-title" data-i18n="colour_question_title">What number or shape do you see in the circle?</h3>
+              <p class="colour-panel-desc" data-i18n="colour_question_desc">Look at the dots for 3 to 5 seconds. Select the number formed by the dots:</p>
+
+              <div class="colour-options-grid" id="colourOptionsGrid">
+                <!-- Options injected by JS -->
+              </div>
+
+              <div class="colour-action-btns">
+                <button class="btn btn-secondary w-100" id="btnColourCantSee">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                  <span data-i18n="btn_nothing_visible">Nothing is visible / Just random dots</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Navigation Footer -->
+        <div class="section-footer-nav">
+          <button class="btn btn-secondary" id="btnColourBack">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            <span data-i18n="btn_back">Back</span>
+          </button>
+          <button class="btn btn-primary btn-lg" id="btnFinishToResults">
+            <span data-i18n="btn_proceed_results">Complete &amp; Generate Results</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 7: RESULTS DASHBOARD
+         ======================================================== -->
+    <section class="page-section" id="sectionResults" data-section="results">
+      <div class="section-container">
+        <!-- Dashboard Top Header -->
+        <div class="results-banner">
+          <div class="results-banner-text">
+            <div class="results-status-chip">
+              <span class="dot-success"></span>
+              <span data-i18n="res_screening_complete">Preliminary Screening Completed</span>
+            </div>
+            <h2 class="results-title" data-i18n="res_dashboard_title">Your Digital Vision Report</h2>
+            <p class="results-timestamp" id="resultsTimestamp">Screening performed on: November 8, 2026</p>
+          </div>
+
+          <div class="results-banner-actions">
+            <button class="btn btn-audio-play" id="btnSpeakResultsReport" aria-label="Listen to screening report">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              </svg>
+              <span id="btnSpeakResultsText" data-i18n="btn_listen_results">Listen to Report</span>
+            </button>
+            <button class="btn btn-secondary" id="btnPrintReport">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 6 2 18 2 18 9"/>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                <rect x="6" y="14" width="12" height="8"/>
+              </svg>
+              <span data-i18n="btn_print_report">Print Official Report</span>
+            </button>
+            <button class="btn btn-primary" id="btnViewDetailedReportModal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <span data-i18n="btn_view_report">View Summary</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Overall Summary Card -->
+        <div class="overall-summary-card">
+          <div class="summary-metric-left">
+            <div class="summary-acuity-badge" id="summaryAcuityBadge">
+              <span class="acuity-label" data-i18n="res_overall_rating">Overall Performance</span>
+              <h3 class="acuity-score" id="summaryAcuityScore">20/20 &bull; Normal</h3>
+            </div>
+          </div>
+          <div class="summary-metric-right">
+            <p class="summary-explanation" id="summaryExplanation">
+              Both your right and left eyes achieved standard preliminary visual resolution on digital optotypes. Colour perception is within typical parameters.
+            </p>
+            <div class="summary-advisory-pill" id="summaryAdvisoryPill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              <span id="summaryAdvisoryText">Regular annual eye check-ups are recommended even if current vision tests normal.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Individual Results Grid -->
+        <div class="results-cards-grid">
+          <!-- Card 1: Right Eye Tumbling E -->
+          <div class="result-metric-card" id="cardResultTumblingOD">
+            <div class="result-card-header">
+              <div class="eye-side-pill">OD &bull; Right Eye</div>
+              <span class="test-type-pill">Tumbling E</span>
+            </div>
+            <div class="result-score-large" id="resTumblingODScore">20/20</div>
+            <div class="result-status-tag tag-good" id="resTumblingODTag">Standard Acuity</div>
+            <div class="result-meta-list">
+              <div class="meta-row">
+                <span>Accuracy:</span>
+                <strong id="resTumblingODAccuracy">6 / 6 correct</strong>
+              </div>
+              <div class="meta-row">
+                <span>Smallest Optotype:</span>
+                <strong id="resTumblingODSmallest">Level 6</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Left Eye Tumbling E -->
+          <div class="result-metric-card" id="cardResultTumblingOS">
+            <div class="result-card-header">
+              <div class="eye-side-pill">OS &bull; Left Eye</div>
+              <span class="test-type-pill">Tumbling E</span>
+            </div>
+            <div class="result-score-large" id="resTumblingOSScore">20/20</div>
+            <div class="result-status-tag tag-good" id="resTumblingOSTag">Standard Acuity</div>
+            <div class="result-meta-list">
+              <div class="meta-row">
+                <span>Accuracy:</span>
+                <strong id="resTumblingOSAccuracy">6 / 6 correct</strong>
+              </div>
+              <div class="meta-row">
+                <span>Smallest Optotype:</span>
+                <strong id="resTumblingOSSmallest">Level 6</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Right Eye Alphabet -->
+          <div class="result-metric-card" id="cardResultAlphabetOD">
+            <div class="result-card-header">
+              <div class="eye-side-pill">OD &bull; Right Eye</div>
+              <span class="test-type-pill">Snellen Alphabet</span>
+            </div>
+            <div class="result-score-large" id="resAlphabetODScore">20/20</div>
+            <div class="result-status-tag tag-good" id="resAlphabetODTag">Clear Recognition</div>
+            <div class="result-meta-list">
+              <div class="meta-row">
+                <span>Letters Identified:</span>
+                <strong id="resAlphabetODAccuracy">6 / 6</strong>
+              </div>
+              <div class="meta-row">
+                <span>Estimated logMAR:</span>
+                <strong id="resAlphabetODLogmar">0.00</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Left Eye Alphabet -->
+          <div class="result-metric-card" id="cardResultAlphabetOS">
+            <div class="result-card-header">
+              <div class="eye-side-pill">OS &bull; Left Eye</div>
+              <span class="test-type-pill">Snellen Alphabet</span>
+            </div>
+            <div class="result-score-large" id="resAlphabetOSScore">20/20</div>
+            <div class="result-status-tag tag-good" id="resAlphabetOSTag">Clear Recognition</div>
+            <div class="result-meta-list">
+              <div class="meta-row">
+                <span>Letters Identified:</span>
+                <strong id="resAlphabetOSAccuracy">6 / 6</strong>
+              </div>
+              <div class="meta-row">
+                <span>Estimated logMAR:</span>
+                <strong id="resAlphabetOSLogmar">0.00</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Colour Vision Perception -->
+          <div class="result-metric-card" id="cardResultColour">
+            <div class="result-card-header">
+              <div class="eye-side-pill">Both Eyes &bull; OU</div>
+              <span class="test-type-pill">Colour Plates</span>
+            </div>
+            <div class="result-score-large" id="resColourScore">5 / 5</div>
+            <div class="result-status-tag tag-good" id="resColourTag">Normal Colour Discrimination</div>
+            <div class="result-meta-list">
+              <div class="meta-row">
+                <span>Plates Identified:</span>
+                <strong id="resColourPlatesIdentified">5 of 5 correct</strong>
+              </div>
+              <div class="meta-row">
+                <span>Red-Green Perception:</span>
+                <strong id="resColourRedGreen">Typical</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clinical Recommendation & Actions -->
+        <div class="results-bottom-actions">
+          <div class="disclaimer-inline-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <p>
+              <strong>Important Clinical Notice:</strong> Ordinary consumer screens vary in subpixel pitch, brightness, and calibration. This screening provides preliminary indications. If you experience eye strain, headaches, sudden blurriness, or difficulty seeing road signs, consult an optometrist or ophthalmologist immediately.
+            </p>
+          </div>
+
+          <div class="results-cta-buttons">
+            <button class="btn btn-secondary" id="btnRestartScreeningPrompt">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+              <span data-i18n="btn_restart_screening">Start New Screening</span>
+            </button>
+            <button class="btn btn-primary" id="btnNavToLearn">
+              <span data-i18n="btn_go_to_learn">Explore Eye Care &amp; 20-20-20 Rule</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 8: UNDERSTAND, LEARN AND CARE
+         ======================================================== -->
+    <section class="page-section" id="sectionLearn" data-section="learn">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="sub-badge" data-i18n="learn_badge">Eye Wellness &amp; Education</span>
+          <h2 class="section-title" data-i18n="learn_title">Understand Your Vision &amp; Care For Your Eyes</h2>
+          <p class="section-subtitle" data-i18n="learn_subtitle">
+            Evidence-based guide to digital eye strain prevention, optical health habits, and when to seek medical attention.
+          </p>
+          <div class="header-action-center mt-3">
+            <button class="btn btn-audio-play" id="btnSpeakPrecautions" aria-label="Listen to eye care precautions">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              </svg>
+              <span id="btnSpeakPrecautionsText" data-i18n="btn_listen_precautions">🔊 Listen to Precautions</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- AI Voice Audio Explanation Hub Placeholder -->
+        <div class="audio-learn-hub">
+          <div class="audio-hub-content">
+            <div class="audio-hub-meta">
+              <div class="audio-badge">
+                <span class="audio-pulse"></span>
+                <span>AI Voice Clinical Explainer [Voice Hub]</span>
+              </div>
+              <h3 data-i18n="audio_explainer_title">Listen to Personalized Vision Explanations</h3>
+              <p data-i18n="audio_explainer_desc">Our voice assistant explains your screening results, visual acuity metrics, and eye-strain preventive measures in your selected language.</p>
+            </div>
+
+            <!-- Audio Player Controls -->
+            <div class="audio-player-widget">
+              <button class="audio-play-round-btn" id="btnPlayVoiceExplanation" aria-label="Play Voice Summary">
+                <svg id="playIconSvg" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+
+              <div class="audio-waveform-container">
+                <div class="waveform-bars" id="waveformBars">
+                  <span class="wbar"></span><span class="wbar"></span><span class="wbar"></span>
+                  <span class="wbar"></span><span class="wbar"></span><span class="wbar"></span>
+                  <span class="wbar"></span><span class="wbar"></span><span class="wbar"></span>
+                  <span class="wbar"></span><span class="wbar"></span><span class="wbar"></span>
+                  <span class="wbar"></span><span class="wbar"></span><span class="wbar"></span>
+                </div>
+                <div class="audio-track-info">
+                  <span id="audioTrackStatus" data-i18n="audio_ready_status">Audio Summary: Ready for playback</span>
+                  <span id="audioTrackDuration">01:45</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive 20-20-20 Rule Timer Widget -->
+        <div class="rule-20-timer-card">
+          <div class="rule-timer-header">
+            <div class="rule-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <h3 data-i18n="timer_title">Interactive 20-20-20 Rule Timer</h3>
+              <p data-i18n="timer_desc">Every <strong>20 minutes</strong>, look at an object <strong>20 feet (6 meters)</strong> away for at least <strong>20 seconds</strong> to relax your eye ciliary muscles.</p>
+            </div>
+          </div>
+
+          <div class="rule-timer-display-box">
+            <div class="countdown-circle">
+              <span class="countdown-time" id="timerMinutesSeconds">20:00</span>
+              <span class="countdown-label" id="timerStateLabel">Work Interval</span>
+            </div>
+
+            <div class="timer-controls">
+              <button class="btn btn-primary" id="btnStart20Timer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span id="btnTimerText">Start 20m Timer</span>
+              </button>
+              <button class="btn btn-secondary" id="btnTest20Break">
+                <span>Simulate 20s Break</span>
+              </button>
+              <button class="btn btn-outline" id="btnReset20Timer">
+                <span>Reset</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Educational Article Cards Grid -->
+        <div class="edu-articles-grid">
+          <!-- 1: Understanding Acuity -->
+          <div class="edu-card">
+            <div class="edu-card-icon icon-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+            </div>
+            <h3 data-i18n="edu_acuity_title">1. Understanding Screening Results</h3>
+            <p data-i18n="edu_acuity_desc">20/20 vision means you can resolve at 20 feet what a person with standard acuity sees at 20 feet. 20/40 means you must be 20 feet away to read what standard eyes see at 40 feet. Different eyes may naturally vary.</p>
+          </div>
+
+          <!-- 2: Common Refractive Errors -->
+          <div class="edu-card">
+            <div class="edu-card-icon icon-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3 data-i18n="edu_refractive_title">2. Common Vision Difficulties</h3>
+            <p data-i18n="edu_refractive_desc"><strong>Myopia (Nearsightedness):</strong> Distant objects blur. <strong>Hyperopia (Farsightedness):</strong> Close objects cause strain. <strong>Astigmatism:</strong> Imperfect cornea curvature causes ghosting. <strong>Presbyopia:</strong> Age-related reading difficulty.</p>
+          </div>
+
+          <!-- 3: Daily Eye Habits -->
+          <div class="edu-card">
+            <div class="edu-card-icon icon-teal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 data-i18n="edu_habits_title">3. General Eye-Health Habits</h3>
+            <p data-i18n="edu_habits_desc">Blink consciously—when staring at digital screens, our blink rate drops from 15 times/minute to only 5–7 times, leading to dry eyes. Keep screens clean and maintain 15–20 degrees downward viewing angle.</p>
+          </div>
+
+          <!-- 4: Screen Time Precautions -->
+          <div class="edu-card">
+            <div class="edu-card-icon icon-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3 data-i18n="edu_screentime_title">4. Screen-Time &amp; Ergonomics</h3>
+            <p data-i18n="edu_screentime_desc">Match ambient room brightness to screen brightness. Avoid using mobile screens in a completely pitch-black bedroom. Position displays approximately 50 to 60 cm away with text size comfortably scaled.</p>
+          </div>
+
+          <!-- 5: Nutrition -->
+          <div class="edu-card">
+            <div class="edu-card-icon icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12A10 10 0 0 1 12 2z"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3 data-i18n="edu_nutrition_title">5. Balanced Nutrition for Eyes</h3>
+            <p data-i18n="edu_nutrition_desc">Incorporate foods rich in <strong>Vitamin A</strong> (carrots, sweet potatoes), <strong>Lutein &amp; Zeaxanthin</strong> (spinach, kale), and <strong>Omega-3 fatty acids</strong> (walnuts, flaxseed, oily fish) to support retinal photoreceptor and tear-film health.</p>
+          </div>
+
+          <!-- 6: When to Consult -->
+          <div class="edu-card highlight-danger">
+            <div class="edu-card-icon icon-red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <h3 data-i18n="edu_consult_title">6. When to Consult a Professional</h3>
+            <p data-i18n="edu_consult_desc">Seek urgent professional eye care if you experience: sudden loss or dimming of vision, dark curtains in peripheral sight, flashes of light, sudden increase in floaters, persistent ocular pain, or double vision.</p>
+          </div>
+        </div>
+
+        <div class="section-footer-nav">
+          <button class="btn btn-secondary" id="btnLearnBack">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            <span data-i18n="btn_back_dashboard">Back to Results</span>
+          </button>
+          <button class="btn btn-primary" id="btnLearnToHome">
+            <span data-i18n="btn_return_home">Return to Home</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       MODAL 1: VOICE ASSISTANT & COMMANDS DIALOG
+       ======================================================== -->
+  <div class="modal-backdrop" id="modalVoiceAssistant" role="dialog" aria-modal="true" aria-labelledby="voiceModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+            </svg>
+          </div>
+          <div>
+            <h3 id="voiceModalTitle">Voice Interface &amp; Audio Assistant</h3>
+            <span class="modal-subtitle">Web Speech API &bull; Multilingual Prepared</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="btnCloseVoiceModal" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Live Microphone Test Pill -->
+        <div class="voice-tester-box">
+          <div class="mic-status-display">
+            <button class="mic-toggle-action-btn" id="btnToggleSpeechTest" aria-label="Toggle Microphone Voice Test">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+            </button>
+            <div class="mic-live-label">
+              <strong id="voiceStatusTitle">Tap to Test Voice Input</strong>
+              <span id="voiceStatusSubtitle">Uses browser Web Speech API in currently active language.</span>
+            </div>
+          </div>
+          <div class="voice-transcript-output" id="voiceTranscriptOutput">
+            "Spoken transcript will appear here..."
+          </div>
+        </div>
+
+        <h4 class="mt-4 mb-2">Supported Voice Commands in Tests:</h4>
+        <div class="commands-table-wrapper">
+          <table class="commands-table">
+            <thead>
+              <tr>
+                <th>Test / Section</th>
+                <th>Spoken Commands</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Tumbling E</strong></td>
+                <td><code>"Up"</code>, <code>"Down"</code>, <code>"Left"</code>, <code>"Right"</code></td>
+                <td>Submits direction</td>
+              </tr>
+              <tr>
+                <td><strong>Alphabet Test</strong></td>
+                <td><code>"Letter [A-Z]"</code> (e.g. "C", "D", "E")</td>
+                <td>Identifies Snellen letter</td>
+              </tr>
+              <tr>
+                <td><strong>Any Vision Test</strong></td>
+                <td><code>"Can't see"</code> / <code>"Too small"</code></td>
+                <td>Registers visual threshold</td>
+              </tr>
+              <tr>
+                <td><strong>Navigation</strong></td>
+                <td><code>"Next"</code>, <code>"Back"</code>, <code>"Repeat"</code>, <code>"Finish"</code></td>
+                <td>Voice flow controls</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout-note mt-3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <p>
+            <strong>Technical Architecture:</strong> Native speech synthesis (Text-to-Speech) works across all modern browsers. Browser speech recognition (STT) requires microphone permissions and an active HTTPS or localhost context.
+          </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnDismissVoiceModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+         MODAL 2: DETAILED CLINICAL REPORT PREVIEW
+         ======================================================== -->
+  <div class="modal-backdrop" id="modalDetailedReport" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div>
+            <h3 id="reportModalTitle">Comprehensive Eye Screening Summary</h3>
+            <span class="modal-subtitle">Official Preliminary Record &bull; Session Details</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="btnCloseReportModal" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="modal-body" id="printableReportArea">
+        <!-- Clean Medical Header for print/view -->
+        <div class="print-medical-header">
+          <div class="pm-brand">
+            <h2>TEST YOUR EYES</h2>
+            <p>Voice-Based Multilingual Digital Eyesight Screening System</p>
+            <p class="pm-meta">Digital Vision Screening System &bull; Preliminary Optical Evaluation</p>
+          </div>
+          <div class="pm-date">
+            <span id="printDateString">Date: 2026-11-08</span>
+            <span>Record ID: #TYE-<span id="printSessionId">8942</span></span>
+          </div>
+        </div>
+
+        <div class="report-patient-info-strip">
+          <div class="rpi-item">
+            <label>Selected Language:</label>
+            <strong id="printReportLang">English (en-US)</strong>
+          </div>
+          <div class="rpi-item">
+            <label>Screen Calibration:</label>
+            <span>Standard Display (40-50 cm Distance)</span>
+          </div>
+          <div class="rpi-item">
+            <label>Screening Type:</label>
+            <span>Monocular (OD / OS)</span>
+          </div>
+        </div>
+
+        <!-- Detailed Table of Results -->
+        <table class="report-detail-table">
+          <thead>
+            <tr>
+              <th>Screening Module</th>
+              <th>Right Eye (OD)</th>
+              <th>Left Eye (OS)</th>
+              <th>Reference Standard (Informational)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tumbling E Acuity</strong></td>
+              <td id="rptTumblingOD">Not Screened</td>
+              <td id="rptTumblingOS">Not Screened</td>
+              <td>20/20 represents standard resolution at tested distance</td>
+            </tr>
+            <tr>
+              <td><strong>Snellen Alphabet Acuity</strong></td>
+              <td id="rptAlphabetOD">Not Screened</td>
+              <td id="rptAlphabetOS">Not Screened</td>
+              <td>Standard resolution down to smallest font tier</td>
+            </tr>
+            <tr>
+              <td><strong>Colour Perception (Pseudoisochromatic Sim)</strong></td>
+              <td colspan="2" id="rptColourVal" class="text-center">5 of 5 correct (Screening Simulation)</td>
+              <td>Digital red-green pseudoisochromatic plate simulation</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="report-findings-box">
+          <h4>Screening Performance Summary:</h4>
+          <p id="rptSummaryText">
+            The candidate demonstrates normal visual acuity and colour discrimination across both eyes during this preliminary screening. Monocular responses show symmetry between the right and left visual pathways.
+          </p>
+        </div>
+
+        <div class="report-legal-disclaimer">
+          <p>
+            <strong>NON-DIAGNOSTIC NOTICE:</strong> This screening report was generated by TEST YOUR EYES for educational and preliminary wellness purposes. It is not a clinical medical prescription or official diagnosis. Consult an optometrist or ophthalmologist for a comprehensive dilated eye examination.
+          </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnDismissReportModal">Close</button>
+        <button class="btn btn-primary" id="btnModalPrintTrigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Print / Save PDF</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+         MODAL 3: RESTART CONFIRMATION
+         ======================================================== -->
+  <div class="modal-backdrop" id="modalRestartConfirm" role="dialog" aria-modal="true" aria-labelledby="confirmRestartTitle">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-header">
+        <h3 id="confirmRestartTitle" data-i18n="modal_restart_title">Restart Eye Screening?</h3>
+        <button class="modal-close-btn" id="btnCancelRestartModal" aria-label="Cancel">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p data-i18n="modal_restart_msg">Are you sure you want to restart? Your current session progress and recorded answers will be reset.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnAbortRestart" data-i18n="btn_cancel">Cancel</button>
+        <button class="btn btn-danger" id="btnConfirmRestart" data-i18n="btn_confirm_restart">Yes, Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+         MODAL 4: OPTIONAL TEST RUNNER MODAL (Contrast / Amsler / Peripheral)
+         ======================================================== -->
+  <div class="modal-backdrop" id="modalOptionalRunner" role="dialog" aria-modal="true" aria-labelledby="optionalRunnerTitle">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="optionalRunnerTitle">Auxiliary Vision Activities</h3>
+          <span class="modal-subtitle" id="optionalRunnerSubtitle">Interactive test runner</span>
+        </div>
+        <button class="modal-close-btn" id="btnCloseOptionalRunner" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body" id="optionalRunnerBody">
+        <!-- Injected dynamically based on test chosen -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 5: MONOCULAR EYE-SWITCH GATE (OD -> OS TRANSITION)
+       ======================================================== -->
+  <div class="modal-backdrop" id="modalEyeSwitchGate" role="dialog" aria-modal="true" aria-labelledby="eyeSwitchTitle">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <h3 id="eyeSwitchTitle" data-i18n="modal_eye_switch_title">Switch Eye: Cover Right Eye (OD)</h3>
+            <span class="modal-subtitle" data-i18n="modal_eye_switch_sub">Monocular Protocol &bull; Clinical Pause</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body text-center">
+        <!-- Compact Professional Eye-Cover Illustration -->
+        <div class="eye-switch-visual-area">
+          <svg class="eye-cover-svg" viewBox="0 0 320 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Illustration showing right eye covered and left eye open for testing">
+            <defs>
+              <linearGradient id="handCoverGrad" x1="20" y1="20" x2="120" y2="100" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#6366f1" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.15"/>
+              </linearGradient>
+              <radialGradient id="activeIrisGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="65%" stop-color="#0284c7"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </radialGradient>
+            </defs>
+
+            <!-- LEFT SIDE: Right Eye (OD) - Covered by Palm -->
+            <g class="eye-covered-group" transform="translate(10, 5)">
+              <!-- Eyebrow -->
+              <path d="M25 28C45 20 75 22 95 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+              <!-- Closed / Resting Eye Arc -->
+              <path d="M30 48C45 56 75 56 90 48" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+              <path d="M48 53L46 59M60 54L60 61M72 53L74 59" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+              
+              <!-- Cupped Palm / Hand Gently Covering Eye -->
+              <path d="M18 42C18 30 35 24 60 24C85 24 102 30 102 42C102 62 88 78 60 78C32 78 18 62 18 42Z" fill="url(#handCoverGrad)" stroke="#818cf8" stroke-width="2" stroke-dasharray="4 2"/>
+              <!-- Hand palm outline lines -->
+              <path d="M40 78C36 68 38 48 44 38M60 78C58 64 60 44 64 34M80 78C76 66 74 48 76 38" stroke="#a5b4fc" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+              
+              <!-- "OD • Covered" Badge -->
+              <rect x="22" y="86" width="76" height="20" rx="10" fill="rgba(16, 185, 129, 0.16)" stroke="rgba(16, 185, 129, 0.45)" stroke-width="1"/>
+              <text x="60" y="99.5" text-anchor="middle" fill="#34d399" font-size="9.5" font-weight="700" font-family="system-ui, sans-serif">OD &bull; COVERED</text>
+            </g>
+
+            <!-- CENTER: Directional Transition Arrow -->
+            <g class="switch-arrow-group" transform="translate(136, 42)">
+              <circle cx="24" cy="12" r="16" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+              <path d="M16 12H30M24 6L30 12L24 18" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+
+            <!-- RIGHT SIDE: Left Eye (OS) - Open & Active -->
+            <g class="eye-active-group" transform="translate(190, 5)">
+              <!-- Eyebrow -->
+              <path d="M25 28C45 20 75 22 95 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+              <!-- Eye Contour -->
+              <path d="M20 48C38 30 82 30 100 48C82 66 38 66 20 48Z" fill="rgba(56, 189, 248, 0.08)" stroke="#38bdf8" stroke-width="2"/>
+              <!-- Iris -->
+              <circle cx="60" cy="48" r="16" fill="url(#activeIrisGrad)"/>
+              <!-- Pupil -->
+              <circle cx="60" cy="48" r="7" fill="#060b16"/>
+              <!-- Glint -->
+              <circle cx="56" cy="44" r="2.5" fill="#ffffff"/>
+              <!-- Focus Reticle Crosshair -->
+              <circle cx="60" cy="48" r="22" stroke="#38bdf8" stroke-width="1" stroke-dasharray="3 3" opacity="0.75"/>
+              <path d="M60 22V28M60 68V74M34 48H40M80 48H86" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+
+              <!-- "OS • Testing" Badge -->
+              <rect x="22" y="86" width="76" height="20" rx="10" fill="rgba(56, 189, 248, 0.16)" stroke="rgba(56, 189, 248, 0.55)" stroke-width="1"/>
+              <text x="60" y="99.5" text-anchor="middle" fill="#38bdf8" font-size="9.5" font-weight="700" font-family="system-ui, sans-serif">OS &bull; TESTING</text>
+            </g>
+          </svg>
+        </div>
+
+        <p class="eye-switch-desc" id="eyeSwitchInstructionBody">
+          You have completed testing for your <strong>Right Eye (OD)</strong>.
+        </p>
+
+        <div class="callout-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <p>
+            <strong>Action:</strong> Gently shift your palm to cover your <strong>RIGHT EYE</strong>. Keep both eyes open behind your palm to prevent squinting and pressure.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-lg w-100" id="btnConfirmEyeSwitchProceed">
+          <span data-i18n="btn_proceed_left_eye">I Have Covered My Right Eye &bull; Begin Left Eye Test</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 6: SCREEN DPI CALIBRATION TOOL
+       ======================================================== -->
+  <div class="modal-backdrop" id="modalScreenCalibration" role="dialog" aria-modal="true" aria-labelledby="calibModalTitle">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+          </div>
+          <div>
+            <h3 id="calibModalTitle">Screen DPI &amp; Size Calibration</h3>
+            <span class="modal-subtitle">Ensure Physical Millimeter Optotype Accuracy</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="btnCloseCalibrationModal" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-2 text-secondary" style="font-size: 0.92rem;">
+          To approximate 5-arcminute optical visual angle at a recommended 40–50 cm testing distance, calibrate your display dimensions:
+        </p>
+        <div class="alert alert-notice mb-3" style="background: rgba(56, 189, 248, 0.08); border-left: 3px solid var(--accent-blue); padding: 8px 12px; border-radius: 6px; font-size: 0.82rem; color: var(--text-secondary);">
+          <strong>Note on Device Presets:</strong> Presets provide a general estimate only. Because display pixel densities (PPI) vary across hardware manufacturers, presets do NOT guarantee exact physical dimensions. For true millimeter optotype sizing, align the slider with a physical card (standard 85.6 mm width) below.
+        </div>
+
+        <!-- Method A: Device Presets -->
+        <div class="calibration-presets-grid">
+          <button class="calib-preset-btn active" data-scale="1.0" id="presetLaptop">
+            <strong>Laptop Display (Estimated)</strong>
+            <span>13" &ndash; 16" Standard (Approx)</span>
+          </button>
+          <button class="calib-preset-btn" data-scale="1.15" id="presetDesktop">
+            <strong>Desktop Monitor (Estimated)</strong>
+            <span>22" &ndash; 27" Display (Approx)</span>
+          </button>
+          <button class="calib-preset-btn" data-scale="0.85" id="presetMobile">
+            <strong>Mobile Phone (Estimated)</strong>
+            <span>5.5" &ndash; 6.7" Screen (Approx)</span>
+          </button>
+        </div>
+
+        <!-- Method B: Card Width Calibration -->
+        <div class="card-ruler-calibration mt-4">
+          <div class="ruler-header">
+            <span>Physical Reference: Match Any Standard Credit / ID Card:</span>
+            <strong id="cardCalibWidthDisplay">85.6 mm (Standard)</strong>
+          </div>
+          <div class="ruler-card-preview-wrapper">
+            <div class="ruler-card-box" id="rulerCardBox" style="width: 280px;">
+              <div class="rc-chip"></div>
+              <span>Standard 85.6 mm Card Width</span>
+            </div>
+          </div>
+          <input type="range" class="ruler-range-slider" id="sliderCardWidth" min="200" max="400" value="280">
+          <span class="ruler-hint">Hold an ID or credit card against your screen and adjust slider until physical edges match.</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnResetCalibration">Reset Default</button>
+        <button class="btn btn-primary" id="btnSaveCalibration">Apply &amp; Save Calibration</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo-text">
+          <span class="brand-title">TEST YOUR EYES</span>
+          <span class="brand-tagline">Voice-Based Multilingual Digital Eyesight Screening System</span>
+        </div>
+        <p class="footer-about">
+          An advanced digital eyesight screening platform designed to democratize preliminary vision assessment with multilingual voice guidance and calibrated digital optotypes.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#home" class="footer-nav-link" data-target="home">Home</a></li>
+          <li><a href="#language" class="footer-nav-link" data-target="language">Language Selection</a></li>
+          <li><a href="#instructions" class="footer-nav-link" data-target="instructions">Instructions</a></li>
+          <li><a href="#learn" class="footer-nav-link" data-target="learn">Eye Care &amp; Education</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-tech">
+        <h4>System Architecture</h4>
+        <ul>
+          <li>Frontend: HTML5, Modern CSS3, Modular ES6 JS</li>
+          <li>Speech Synthesis &amp; Web Speech Recognition Hook</li>
+          <li>Calibrated Optotypes (Tumbling E &amp; Sloan Letters)</li>
+          <li>Digital Pseudoisochromatic Colour Plates</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>&copy; 2026 TEST YOUR EYES. Digital Vision Screening System. For educational preliminary screening only.</p>
+        <div class="theme-hint">Dual Theme Active &bull; LocalStorage Enabled</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
